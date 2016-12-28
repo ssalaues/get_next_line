@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   gnl-driver.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssalaues <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/23 16:32:36 by ssalaues          #+#    #+#             */
-/*   Updated: 2016/12/27 19:06:21 by ssalaues         ###   ########.fr       */
+/*   Created: 2016/12/26 14:33:35 by ssalaues          #+#    #+#             */
+/*   Updated: 2016/12/27 18:04:33 by ssalaues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <stdio.h>
+#include "./includes/get_next_line.h"
+#include <fcntl.h>
 
-#define BUFF_SIZE 32
-#include "../libft/libft.h"
-
-typedef struct		s_gnl
+int	main(int ac, char **av)
 {
-	char			*data;
-	size_t			len;
-	struct	s_list	*next;
-}					t_gnl;
-
-int	get_next_line(const int fd, char **line);
+	int	fd = 0;
+	char *line;
+	fd = open(av[1], O_RDONLY);	
+	get_next_line(fd, &line);
+	printf("%s", line);
+}
