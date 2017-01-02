@@ -6,19 +6,20 @@
 /*   By: ssalaues <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 16:32:08 by ssalaues          #+#    #+#             */
-/*   Updated: 2016/12/27 19:02:23 by ssalaues         ###   ########.fr       */
+/*   Updated: 2017/01/01 21:17:50 by ssalaues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	get_next_line(const int fd, char **line)
+/*int	get_next_line(const int fd, char **line)
 {
-	char 			*t1;
-//	char			*t2;
+	char 			t1[BUFF_SIZE];
+t2	char			*t2;
 	static t_list	*rdin;
-	
-	t1 = ft_strnew(BUFF_SIZE + 1);
+
+//	t1 = ft_strnew(BUFF_SIZE + 1);
+	ft_bzero(t1, BUFF_SIZE);
 	while (read(fd, t1, BUFF_SIZE))
 		{
 			rdin = ft_lstnew(t1, BUFF_SIZE + 1);
@@ -36,4 +37,26 @@ int	get_next_line(const int fd, char **line)
 //				free(t2);
 		}
 	return (0); //Reading completed
+}*/
+
+int	get_next_line(const int fd, char **line)
+{
+	char			t1[BUFF_SIZE + 1];
+	char			*t2;
+	size_t			ct;
+	static t_list	*rdin;
+
+	ct = 1;
+	t2 = ft_strnew(ft_strlen(t2) + BUFF_SIZE + 1);
+	while (read(fd, t1, BUFF_SIZE))
+	{
+		ft_strncat(t2, t1, ft_wordlen(t1, '\n') + ft_strlen(t2));//Copy to first \n if found
+		if (ft_strchr(t1, '\n'))
+		{
+			*line = t2;
+			return (1);	
+		}
+		ct++;
+	}
+	return (0); //Reading Complete EOF
 }
