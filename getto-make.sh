@@ -6,10 +6,10 @@
 #    By: ssalaues <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/26 17:18:20 by ssalaues          #+#    #+#              #
-#    Updated: 2016/12/27 17:36:26 by ssalaues         ###   ########.fr        #
+#    Updated: 2017/01/10 21:19:09 by ssalaues         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 cd ./libft && make
 cd ..
-gcc *.c -Iincludes -Llibft -lft -g
+gcc *.c -Iincludes -Llibft -lft -g -fsanitize=address
