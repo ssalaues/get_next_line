@@ -6,7 +6,7 @@
 /*   By: ssalaues <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/26 14:33:35 by ssalaues          #+#    #+#             */
-/*   Updated: 2017/01/09 15:45:13 by ssalaues         ###   ########.fr       */
+/*   Updated: 2017/01/25 19:55:31 by ssalaues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
@@ -19,5 +19,23 @@ int	main(int ac, char **av)
 	char *line;
 	fd = open(av[1], O_RDONLY);	
 	get_next_line(fd, &line);
-	printf("%s", line);
+	printf("%s\n", line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
 }
