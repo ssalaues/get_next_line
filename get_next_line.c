@@ -6,49 +6,48 @@
 /*   By: ssalaues <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 16:32:08 by ssalaues          #+#    #+#             */
-/*   Updated: 2017/01/10 19:47:51 by ssalaues         ###   ########.fr       */
+/*   Updated: 2017/01/25 16:09:58 by ssalaues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-static char	*ft_strndup(const char *s1, size_t n)
-{
-	char *dup;
 
-	dup = ft_memalloc(n + 1);
-	if (!dup)
-		return (NULL);
-	else
-		ft_strncpy(dup, s1, n);
-	return (dup);
+t_gnl	*gnl_lstnew(char const *data, size_t len, int fd)
+{
+	t_gnl	*new;
+
+	new = (t_gnl *)malloc(sizeof(t_gnl));
+	new->data = ft_memalloc(len);
+	new->len = len;
+	new->fd = fd;
+	new->next = NULL;
+	return (new);
 }
 int	get_next_line(const int fd, char **line)
 {
-	char			t1[BUFF_SIZE + 1];
-    char            *t2;
-	size_t			bs = 0;
-	int				ct = 0;
-	static t_list	*rdin;
+//	char			t1[BUFF_SIZE + 1];
+	static t_gnl	*bl;
 
-	ft_bzero(t1, BUFF_SIZE + 1);
-	while((bs = read(fd, t1, BUFF_SIZE)))
+//	ft_bzero(t1, BUFF_SIZE + 1);
+	if (bl->fd == 0)
+		bl = gnl_lstnew("", BUFF_SIZE + 1, fd);
+	while((bl->bs = read(bl->fd, bl->t1, BUFF_SIZE)))
 	{
-		if (ct == 0)
-			rdin = ft_lstnew((char*)t1, bs + 1);
+		if (bl->bs < 0)
+			return (-1);
 		else
-			{
-            t2 = ft_strndup(ft_strncat(rdin->content, t1, ft_strlen(rdin->content) + bs), ft_strlen(rdin->content) + bs);
-			free(rdin->content);
-			rdin->content = t2;
-            free(t2);
-			}
-		if (ft_strchr(t1, '\n'))
 		{
-			*line = ft_strndup(rdin->content, ft_wordlen(rdin->content, '\n'));
-//			free(rdin->content);
+			bl->t2 = ft_strjoin(bl->data, bl->t1);
+			bl->data = bl->t2;
+		}
+		if (ft_strchr(bl->t1, '\n'))
+		{
+			*line = ft_strndup(bl->data, ft_wordlen(bl->data, '\n'));
+			bl->data = ft_strchr(bl->data, '\n');
+			bl->data++;
 			return (1);
 		}
-		ct++;
+		ft_bzero(bl->t1, BUFF_SIZE + 1);
 	}
 	return (0);
 }
