@@ -6,11 +6,11 @@
 /*   By: ssalaues <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 16:32:36 by ssalaues          #+#    #+#             */
-/*   Updated: 2017/02/11 01:35:45 by ssalaues         ###   ########.fr       */
+/*   Updated: 2017/02/11 22:00:35 by ssalaues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define BUFF_SIZE 128
+#define BUFF_SIZE 16
 # include "./libft/libft.h"
 
 typedef struct		s_gnl
