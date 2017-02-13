@@ -6,7 +6,7 @@
 /*   By: ssalaues <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 16:32:08 by ssalaues          #+#    #+#             */
-/*   Updated: 2017/02/11 22:00:30 by ssalaues         ###   ########.fr       */
+/*   Updated: 2017/02/13 14:31:43 by ssalaues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int	get_next_line(const int fd, char **line)
 		if ((!bl->bs && *bl->data != '\0') || (ft_strchr(bl->data, '\n')))
 		{
 			*line = ft_strndup(bl->data, ft_wordlen(bl->data, '\n'));
-			bl->data = ft_strchr(bl->data, '\n');
-			bl->data++;
+			if ((bl->data = ft_strchr(bl->data, '\n')))
+				bl->data++;
 			return (1);
 		}
 		if (bl->bs == 0)
